@@ -24,7 +24,8 @@ const get_billboards_top_ten = function (from_year, to_year) {
                     top_ten[year].push({
                         position: data[1],
                         title: data[2].replace(/"/g, ""),
-                        artist: data[3]
+                        artist: data[3],
+                        link: rows[i].querySelector("a").href
                     });
                 }
 
