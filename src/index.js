@@ -8,6 +8,11 @@ get_billboards_top_ten(1960, 2020).then(result => {
 
 });
 
-fetch("https://genius.com/Blondie-call-me-lyrics").then(response => console.log(response));
+const headers = new Headers();
+headers.append("Access-Control-Allow-Origin", "http://localhost:3000");
+
+fetch("https://genius.com/Blondie-call-me-lyrics", {
+    headers
+}).then(response => console.log(response));
 
 
