@@ -9,6 +9,7 @@ const get_billboards_top_ten = function (from_year, to_year) {
     const fetch_top_ten_of_year = function (year) {
 
         const wrapper = document.createElement("div");
+        document.body.appendChild(wrapper);
 
         return fetch(API_URL.replace(/%YEAR%/, year))
             .then(response => response.json())
