@@ -20,6 +20,7 @@ const get_billboards_top_ten = function (from_year, to_year) {
 
                 top_ten[year] = [];
 
+                console.log(year);
                 for (let i = 1; i < 11; i = i + 1) {
                     const data = rows[i].textContent.split("\n");
                     top_ten[year].push({
