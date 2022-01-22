@@ -34,7 +34,7 @@ const get_billboards_top_ten = function (from_year, to_year) {
                         }
 
                         top_ten[year].push({
-                            position: data[1],
+                            pos: data[1],
                             title: data[2].replace(/"/g, ""),
                             artist: data[3],
                             link
@@ -53,8 +53,8 @@ const get_billboards_top_ten = function (from_year, to_year) {
     for (let i = from_year; i < to_year + 1; i = i + 1) {
         promises.push(fetch_top_ten_of_year(String(i)));
     }
-    Promise.all(promises).then(() => top_ten);
 
+    return Promise.all(promises).then(() => JSON.stringify(top_ten).replaceAll("file:///wiki/", ""));
 };
 
 export {
