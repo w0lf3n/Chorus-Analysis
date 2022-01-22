@@ -17,18 +17,31 @@ const get_billboards_top_ten = function (from_year, to_year) {
             .then(result => {
 
                 wrapper.innerHTML = result.parse.text["*"];
-                const rows = wrapper.querySelectorAll("tbody tr");
+                const rows = wrapper.querySelectorAll(".wikitable tbody tr");
 
                 top_ten[year] = [];
 
                 for (let i = 1; i < 11; i = i + 1) {
-                    const data = rows[i].textContent.split("\n");
-                    top_ten[year].push({
-                        position: data[1],
-                        title: data[2].replace(/"/g, ""),
-                        artist: data[3],
-                        link: rows[i].querySelector("a").href
-                    });
+                    const positions = rows[i];
+                    if (positions) {
+                        const data = positions.textContent.split("\n");
+
+                        let link = positions.querySelector("a");
+                        if (link) {
+                            link = link.href;
+                        } else {
+                            console.error(year);
+                        }
+
+                        top_ten[year].push({
+                            position: data[1],
+                            title: data[2].replace(/"/g, ""),
+                            artist: data[3],
+                            link
+                        });
+                    } else {
+                        console.error(year);
+                    }
                 }
 
                 wrapper.remove();
