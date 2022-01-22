@@ -1,5 +1,4 @@
 
-
 const get_billboards_top_ten = async function (from_year, to_year) {
 
     const API_URL = "https://en.wikipedia.org/w/api.php?origin=*&action=parse&page=Billboard_Year-End_Hot_100_singles_of_%YEAR%&format=json";
@@ -51,15 +50,12 @@ const get_billboards_top_ten = async function (from_year, to_year) {
 
     const promises = [];
 
-    return fetch("dat/billboard_100_top10.json")
-        .then(response => response.json())
-        .catch(async () => {
-            for (let i = from_year; i < to_year + 1; i = i + 1) {
-                promises.push(fetch_top_ten_of_year(String(i)));
-            }
-            await Promise.all(promises);
-            return JSON.parse(JSON.stringify(top_ten).replaceAll("file:///wiki/", ""));
-        });
+    for (let i = from_year; i < to_year + 1; i = i + 1) {
+        promises.push(fetch_top_ten_of_year(String(i)));
+    }
+
+    await Promise.all(promises);
+    return JSON.parse(JSON.stringify(top_ten).replaceAll("file:///wiki/", ""));
 };
 
 export {

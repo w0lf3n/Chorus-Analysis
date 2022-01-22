@@ -1,0 +1,22 @@
+{
+  "name": "chorus-analysis",
+  "version": "1.0.0",
+  "description": "https://towardsdatascience.com/49-years-of-lyrics-why-so-angry-1adf0a3fa2b4?gi=68eb0f3be8c1",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w0lf3n/Chorus-Analysis.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/w0lf3n/Chorus-Analysis/issues"
+  },
+  "homepage": "https://github.com/w0lf3n/Chorus-Analysis#readme",
+  "dependencies": {
+    "genius-lyrics": "^4.3.5"
+  }
+}
