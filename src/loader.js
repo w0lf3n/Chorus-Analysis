@@ -6,9 +6,10 @@ const get_billboards_top_ten = function (from_year, to_year) {
 
     const top_ten = {};
 
-    const fetch_top_ten_of_year = function (year) {
+    const fetch_top_ten_of_year = async function (year) {
 
         const wrapper = document.createElement("div");
+        wrapper.style.display = "none";
         document.body.appendChild(wrapper);
 
         return fetch(API_URL.replace(/%YEAR%/, year))
@@ -20,7 +21,6 @@ const get_billboards_top_ten = function (from_year, to_year) {
 
                 top_ten[year] = [];
 
-                console.log(year);
                 for (let i = 1; i < 11; i = i + 1) {
                     const data = rows[i].textContent.split("\n");
                     top_ten[year].push({
@@ -31,6 +31,7 @@ const get_billboards_top_ten = function (from_year, to_year) {
                     });
                 }
 
+                wrapper.remove();
             });
 
     };
@@ -39,7 +40,7 @@ const get_billboards_top_ten = function (from_year, to_year) {
     for (let i = from_year; i < to_year + 1; i = i + 1) {
         promises.push(fetch_top_ten_of_year(String(i)));
     }
-    Promise.all(promises).then(() => console.log(JSON.stringify(top_ten)));
+    Promise.all(promises).then(() => top_ten);
 
 };
 
