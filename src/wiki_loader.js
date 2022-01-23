@@ -23,21 +23,20 @@ const get_billboards_top_ten = async function (from_year, to_year) {
                 for (let i = 1; i < 11; i = i + 1) {
                     const positions = rows[i];
                     if (positions) {
+
                         const data = positions.textContent.split("\n");
+                        const links = positions.querySelectorAll("a");
 
-                        let link = positions.querySelector("a");
-                        if (link) {
-                            link = link.href;
-                        } else {
-                            console.error(year);
-                        }
-
-                        top_ten[year].push({
-                            pos: data[1],
-                            title: data[2].replace(/"/g, ""),
-                            artist: data[3],
-                            link
+                        // taking double A-side records into account
+                        data[2].replace(/"/g, "").split(" / ").forEach((title, index) => {
+                            top_ten[year].push({
+                                pos: data[1],
+                                title,
+                                artist: data[3],
+                                link: (links.length > 0) ? links[index].href : ""
+                            });
                         });
+
                     } else {
                         console.error(year);
                     }
@@ -55,7 +54,7 @@ const get_billboards_top_ten = async function (from_year, to_year) {
     }
 
     await Promise.all(promises);
-    return JSON.parse(JSON.stringify(top_ten).replaceAll("file:///wiki/", ""));
+    return JSON.parse(JSON.stringify(top_ten).replaceAll("/wiki/", ""));
 };
 
 export {
